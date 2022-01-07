@@ -22,15 +22,15 @@ pretrained_models = {}
 with open("custom.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.title('FaceRegcognition')
+st.title('Facial Recognition')
 
 def main():
-    id_uploaded = st.file_uploader("Input National ID Card", type=["png","jpg","jpeg"])
+    id_uploaded = st.file_uploader("Thai National ID Card", type=["png","jpg","jpeg"])
     if id_uploaded is not None:
         image_id = np.asarray(bytearray(id_uploaded .read()), dtype=np.uint8)
         image_id  = cv2.imdecode(image_id , cv2.IMREAD_COLOR)
         st.image(image_id, caption='National ID Card', use_column_width=True, channels="BGR")
-        person_uploaded = st.file_uploader("Input Photo", type=["png", "jpg", "jpeg"])
+        person_uploaded = st.file_uploader("Selfie Photo holding Thai National ID Card", type=["png", "jpg", "jpeg"])
         if person_uploaded is not None:
             image_person = np.asarray(bytearray(person_uploaded.read()), dtype=np.uint8)
             image_person = cv2.imdecode(image_person, cv2.IMREAD_COLOR)
@@ -54,10 +54,10 @@ def main():
                 similar = sum(verify) / len(verify)
                 fig = plt.figure()
                 ax = fig.add_subplot(1, 2, 1)
-                ax.set_title("National ID Card")
+                ax.set_title("Thai National ID Card")
                 ax.imshow(id_face[:, :, ::-1])
                 ax = fig.add_subplot(1, 2, 2)
-                ax.set_title("Photo")
+                ax.set_title("Selfie Photo")
                 ax.imshow(person_face[:, :, ::-1])
                 time.sleep(1)
                 st.pyplot(fig)
