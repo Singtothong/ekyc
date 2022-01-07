@@ -25,16 +25,16 @@ with open("custom.css") as f:
 st.title('Facial Recognition')
 
 def main():
-    id_uploaded = st.file_uploader("Thai National ID Card.", type=["png","jpg","jpeg"])
+    id_uploaded = st.file_uploader("Thai National ID Card", type=["png","jpg","jpeg"])
     if id_uploaded is not None:
         image_id = np.asarray(bytearray(id_uploaded .read()), dtype=np.uint8)
         image_id  = cv2.imdecode(image_id , cv2.IMREAD_COLOR)
-        st.image(image_id, caption='Thai National ID Card.', use_column_width=True, channels="BGR")
-        person_uploaded = st.file_uploader("Selfie Photo holding Thai National ID Card.", type=["png", "jpg", "jpeg"])
+        st.image(image_id, caption='Thai National ID Card', use_column_width=True, channels="BGR")
+        person_uploaded = st.file_uploader("Selfie Photo holding Thai National ID Card", type=["png", "jpg", "jpeg"])
         if person_uploaded is not None:
             image_person = np.asarray(bytearray(person_uploaded.read()), dtype=np.uint8)
             image_person = cv2.imdecode(image_person, cv2.IMREAD_COLOR)
-            st.image(image_person, caption='Selfie Photo.', use_column_width=True, channels="BGR")
+            st.image(image_person, caption='Selfie Photo', use_column_width=True, channels="BGR")
 
     class_btn = st.button("Classify")
     if class_btn:
@@ -54,10 +54,10 @@ def main():
                 similar = sum(verify) / len(verify)
                 fig = plt.figure()
                 ax = fig.add_subplot(1, 2, 1)
-                ax.set_title("Thai National ID Card.")
+                ax.set_title("Thai National ID Card")
                 ax.imshow(id_face[:, :, ::-1])
                 ax = fig.add_subplot(1, 2, 2)
-                ax.set_title("Selfie Photo.")
+                ax.set_title("Selfie Photo")
                 ax.imshow(person_face[:, :, ::-1])
                 time.sleep(1)
                 st.pyplot(fig)
